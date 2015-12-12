@@ -1,0 +1,17 @@
+<%= simple_form_for(@post) do |f| %>
+    <div class="field">
+    <%= f.input :author, id: 'post_author' %>
+  </div>
+  <div class="field">
+    <%= f.input :title %>
+  </div>
+    <div class="field">
+      <%= f.input :body %>
+    </div>
+
+    <%= f.input :tags_string %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
