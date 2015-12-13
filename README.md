@@ -1,9 +1,9 @@
-## Simple rails blogging application 
+# Simple rails blogging application 
 
-# App on heroku
+## App on heroku
 [https://serene-wave-1873.herokuapp.com/](https://serene-wave-1873.herokuapp.com/users)
 
-# Admin credentials
+## Admin credentials
 Admin mail: admin@admin.com
 Admin pass: adminadmin
 
