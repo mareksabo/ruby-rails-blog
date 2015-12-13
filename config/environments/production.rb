@@ -7,6 +7,13 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => 'serene-wave-1873.herokuapp.com', :protocol => 'http' }
 
+  config.action_mailer.smtp_settings = {
+    :port      => 587,
+    :address    => 'sandboxcb2d75225f3f4cdbbc5bb5018a01ba47.mailgun.org',
+    :user_name => 'postmaster@sandboxcb2d75225f3f4cdbbc5bb5018a01ba47.mailgun.org',
+    :password  => '9c4b11afe6984c2ffbb1f63273268f98'
+  }
+
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
   # Code is not reloaded between requests.
