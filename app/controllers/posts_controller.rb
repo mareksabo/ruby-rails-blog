@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all.order(updated_at: :desc)
     @tags = Tag.joins(:posts).select('name').group('tags.name, tag_id').order('COUNT(tag_id)').reverse_order
+
   end
 
   # GET /posts/new
