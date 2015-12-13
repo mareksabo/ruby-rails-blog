@@ -1,5 +1,17 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :letter_opener
+  Paperclip.options[:command_path] = "/usr/local/bin/"
+
+#  Rails.application.config.middleware.use ExceptionNotification::Rack,
+#    :email => {
+#    :email_prefix => "[PREFIX] ",
+#    :sender_address => %{"notifier" <notifier@example.com>},
+#    :exception_recipients => %w{marek.sabo.gvpt@gmail.com}
+#  }
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

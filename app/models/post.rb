@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
                         :title,
                         :body
   validates_presence_of :tags_string, :message => 'must have at least one tag'
+  resourcify
 
   def tags_string
     tags.to_a.join(', ')

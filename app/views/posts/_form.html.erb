@@ -1,6 +1,6 @@
 <%= simple_form_for(@post) do |f| %>
     <div class="field">
-    <%= f.input :author, id: 'post_author' %>
+      <%= f.input :author, input_html: {value: current_user.email }, :readonly => true %>
   </div>
   <div class="field">
     <%= f.input :title %>

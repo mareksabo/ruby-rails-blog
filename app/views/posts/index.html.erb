@@ -26,8 +26,10 @@
         <td class="post-title"><%= post.title %></td>
         <td class="post-body"><%= post.body %></td>
         <td class="post-tags"><%= post.tags.join(', ') %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :update, post %>
+            <td><%= link_to 'Edit', edit_post_path(post) %></td>
+            <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

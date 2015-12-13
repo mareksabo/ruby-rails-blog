@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users,
+             :path_names => { :sign_up => 'Register', :sign_in => 'Sign in', :sign_out => 'Sign out' }
   resources :posts
   get 'posts/filter/:name' => 'posts#filter', as: :filter
 
