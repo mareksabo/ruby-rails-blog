@@ -14,6 +14,13 @@ Rails.application.configure do
     :password  => '9c4b11afe6984c2ffbb1f63273268f98'
   }
 
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[postmaster] ",
+    :sender_address => %{"notifier" <notifier@example.com>},
+    :exception_recipients => %w{sabo@mail.muni.cz}
+  }
+
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
   # Code is not reloaded between requests.
