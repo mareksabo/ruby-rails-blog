@@ -9,6 +9,7 @@ class Ability
          can :manage, :all
        else
          can :read, :all
+         can :filter, :all
          can :create, :all
          can :update, Post,  :author => user.email
          can :delete, Post,  :author => user.email
