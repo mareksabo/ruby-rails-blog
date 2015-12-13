@@ -12,7 +12,7 @@ class Ability
          can :filter, :all
          can :create, :all
          can :update, Post,  :author => user.email
-         can :delete, Post,  :author => user.email
+         can :destroy, Post,  :author => user.email
        end
     #
     # The first argument to `can` is the action you are giving the user
