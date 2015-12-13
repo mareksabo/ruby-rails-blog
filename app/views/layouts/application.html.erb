@@ -25,6 +25,10 @@
     </div>
 </div>
 
+  <% if flash[:alert] %>
+    <span class='flash_error' style="color:green"> <%= flash[:alert] %></span>
+  <% end %>
+
 <%= yield %>
 
 </body>
