@@ -8,32 +8,39 @@
 
 <h2> <%= link_to 'Posts', posts_path %> </h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Author</th>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Tags</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @posts.each do |post| %>
+    <div class="container">
+      <div class="post" style="">
+        <h3><%= post.title %></h3>
+        <i><p><%= post.author %></p></i>
+        <div class="post-body"><%= post.body %></div>
+        <h3>Tags</h3>
+        <div class="post-tags"><%= post.tags.join(', ') %></div>
+      </div>
+      <div class="comments">
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr id=<%="post-row-#{post.id}"%>>
-        <td class="post-author"><%= post.author %></td>
-        <td class="post-title"><%= post.title %></td>
-        <td class="post-body"><%= post.body %></td>
-        <td class="post-tags"><%= post.tags.join(', ') %></td>
         <% if can? :update, post %>
-            <td><%= link_to 'Edit', edit_post_path(post) %></td>
-            <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <div>
+              <%= link_to 'Edit', edit_post_path(post) %>
+              <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <div id="comments">
+          <%= render :partial => post.comments %>
+        </div>
+      </div>
+      <%= form_for [post, Comment.new] do |f| %>
+          <p>
+            <!--<%= f.label :author, current_user.email %>-->
+            <div>
+            <%= f.hidden_field :author, :value => current_user.email %>
+            </div>
+            <%= f.text_area :body %>
+          </p>
+          <p><%= f.submit 'Add comment' %></p>
+      <% end %>
+    </div>
+<% end %>
 
 <br>
 

@@ -1,0 +1,7 @@
+<%= div_for comment do %>
+    <p>
+      <%= comment.body %>
+      <br/>
+      <i>Posted <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.author %></i>
+    </p>
+<% end %>

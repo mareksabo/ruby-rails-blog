@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users,
              :path_names => { :sign_up => 'Register', :sign_in => 'Sign in', :sign_out => 'Sign out' }
-  resources :posts
+  resources :posts do
+    resources :comments, :only => [:create]
+  end
   get 'posts/filter/:name' => 'posts#filter', as: :filter
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -39,8 +41,7 @@ Rails.application.routes.draw do
 
   # Example resource route with more complex sub-resources:
   #   resources :products do
-  #     resources :comments
-  #     resources :sales do
+  #     #     resources :sales do
   #       get 'recent', on: :collection
   #     end
   #   end
