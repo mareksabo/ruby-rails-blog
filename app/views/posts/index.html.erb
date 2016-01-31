@@ -32,14 +32,16 @@
           <% end %>
         </div>
       </div>
-      <%= form_for [post, Comment.new] do |f| %>
-          <p>
-            <div>
-            <%= f.hidden_field :author, :value => current_user.email %>
-            </div>
-            <%= f.text_area :body %>
-          </p>
-          <p><%= f.submit 'Add new comment' %></p>
+      <% if post.comment_type != 'forbidden' %>
+          <%= form_for [post, Comment.new] do |f| %>
+              <p>
+              <div>
+                <%= f.hidden_field :author, :value => current_user.email %>
+              </div>
+              <%= f.text_area :body %>
+              </p>
+              <p><%= f.submit 'Add new comment' %></p>
+          <% end %>
       <% end %>
     </div>
 <% end %>

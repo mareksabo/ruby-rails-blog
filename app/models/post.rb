@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+
   has_and_belongs_to_many :tags
   has_many :comments
   validates_presence_of :author,
@@ -6,6 +7,8 @@ class Post < ActiveRecord::Base
                         :body
   validates_presence_of :tags_string, :message => 'must have at least one tag'
   resourcify
+
+  enum comment_type: { 'visible' => 0, 'moderated' => 1, 'forbidden' => 2 }
 
   def tags_string
     tags.to_a.join(', ')

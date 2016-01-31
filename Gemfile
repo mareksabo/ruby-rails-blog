@@ -8,7 +8,7 @@ gem 'cancancan'
 gem 'rolify'
 gem 'paperclip'
 gem 'acts_as_votable', '~> 0.10.0'
-gem 'closure_tree'
+gem 'enum_help'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
