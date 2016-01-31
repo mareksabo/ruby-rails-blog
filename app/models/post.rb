@@ -1,4 +1,8 @@
 class Post < ActiveRecord::Base
+  include TheComments::Commentable
+
+  belongs_to :user
+
   has_and_belongs_to_many :tags
   validates_presence_of :author,
                         :title,
@@ -19,4 +23,19 @@ class Post < ActiveRecord::Base
       tags << tag unless tags.include?(tag)
     end
   end
+
+  # Denormalization methods
+  # Check the documentation for information on advanced usage
+  def commentable_title
+    "Undefined Post Title"
+  end
+
+  def commentable_url
+    "#"
+  end
+
+  def commentable_state
+    "published"
+  end
+
 end

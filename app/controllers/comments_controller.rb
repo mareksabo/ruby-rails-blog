@@ -9,6 +9,16 @@ class CommentsController < ApplicationController
   
   include TheComments::Controller
 
+  def comment_params
+    params
+        .require(:comment)
+        .permit(:title, :contacts, :raw_content, :parent_id, :commentable_type, :commentable_id)
+        .merge(denormalized_fields)
+        .merge(request_data_for_comment)
+        .merge(tolerance_time: params[:tolerance_time].to_i)
+        .merge(user: current_user, view_token: comments_view_token)
+  end
+
   # >>> include TheComments::Controller <<<
   # (!) Almost all methods based on *current_user* method
   #
