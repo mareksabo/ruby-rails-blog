@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.reply{
+    padding-left: 2%;
+}
+
+.comment{
+    padding-left: .4%;
+}

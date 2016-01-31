@@ -10,7 +10,7 @@
 
 <% @posts.each do |post| %>
     <div class="container">
-      <div class="post" style="">
+      <div class="post">
         <h3><%= post.title %></h3>
         <i><p><%= post.author %></p></i>
         <div class="post-body"><%= post.body %></div>
@@ -24,20 +24,22 @@
               <%= link_to 'Edit', edit_post_path(post) %>
               <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
             </div>
+            <br>
         <% end %>
         <div id="comments">
-          <%= render :partial => post.comments %>
+          <% post.comments.each do |comment| %>
+              <%= render comment if comment.parent_id.nil? %>
+          <% end %>
         </div>
       </div>
       <%= form_for [post, Comment.new] do |f| %>
           <p>
-            <!--<%= f.label :author, current_user.email %>-->
             <div>
             <%= f.hidden_field :author, :value => current_user.email %>
             </div>
             <%= f.text_area :body %>
           </p>
-          <p><%= f.submit 'Add comment' %></p>
+          <p><%= f.submit 'Add new comment' %></p>
       <% end %>
     </div>
 <% end %>

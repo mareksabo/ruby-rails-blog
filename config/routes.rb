@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users,
              :path_names => { :sign_up => 'Register', :sign_in => 'Sign in', :sign_out => 'Sign out' }
   resources :posts do
-    resources :comments, :only => [:create]
+    resources :comments, :only => [:create, :new]
   end
   put '/comments/:id/:action' => 'comments#upvote'
   put '/comments/:id/:action' => 'comments#downvote'

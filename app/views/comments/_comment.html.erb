@@ -1,12 +1,21 @@
 <%= div_for comment do %>
-    <p>
-      <%= comment.body %>
-      <br/>
-      <i>Posted <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.author %></i>
-    </p>
-    <%= link_to "Upvote", {:controller =>"comments", :action => "upvote", :id => comment.id}, :class => 'btn', method: :put %>
-    <%= comment.get_upvotes.size %>
-    <%= link_to "Downvote", {:controller =>"comments", :action => "downvote", :id => comment.id}, :class => 'btn', method: :put %>
-    <%= comment.get_downvotes.size %>
-
+    <%= comment.body %>
+    <br/>
+    <small><i>Posted <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.author %></i></small>
+    <br>
+    <small>
+      <%= link_to "Upvote", {:controller =>"comments", :action => "upvote", :id => comment.id}, :class => 'btn', method: :put %>
+      <%= comment.get_upvotes.size %>
+      <%= link_to "Downvote", {:controller =>"comments", :action => "downvote", :id => comment.id}, :class => 'btn', method: :put %>
+      <%= comment.get_downvotes.size %>
+    </small>
+    <%= form_for [comment.post, Comment.new] do |f| %>
+        <%= f.hidden_field :author, :value => current_user.email %>
+        <%= f.hidden_field :parent_id, :value => comment.id %>
+        <%= f.text_field :body %>
+        <%= f.submit 'Reply' %>
+    <% end %>
+    <div class="reply">
+      <%= render comment.replies if comment.replies.any? %>
+    </div>
 <% end %>
