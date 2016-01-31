@@ -13,6 +13,8 @@ class Ability
          can :create, :all
          can :update, Post,  :author => user.email
          can :destroy, Post,  :author => user.email
+         can :create, Comment, :comment_type => 'visible'
+         can :create, Comment, :comment_type => 'moderated'
        end
     #
     # The first argument to `can` is the action you are giving the user

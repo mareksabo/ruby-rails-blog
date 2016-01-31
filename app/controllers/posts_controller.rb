@@ -49,6 +49,9 @@ class PostsController < ApplicationController
     array_of_tags.each do |tag|
       tag.destroy if tag.count <= 1
     end
+    @post.comments.each do |comment|
+      comment.destroy
+    end
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }

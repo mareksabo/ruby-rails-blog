@@ -13,6 +13,7 @@
       <div class="post">
         <h3><%= post.title %></h3>
         <i><p><%= post.author %></p></i>
+        <small><p>Type <%= post.comment_type %></p></small>
         <div class="post-body"><%= post.body %></div>
         <h3>Tags</h3>
         <div class="post-tags"><%= post.tags.join(', ') %></div>
