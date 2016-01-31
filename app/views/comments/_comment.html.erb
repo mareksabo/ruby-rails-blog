@@ -8,6 +8,9 @@
       <%= comment.get_upvotes.size %>
       <%= link_to "Downvote", {:controller =>"comments", :action => "downvote", :id => comment.id}, :class => 'btn', method: :put %>
       <%= comment.get_downvotes.size %>
+      <% if can? :destroy, comment %>
+          <%=  link_to "Delete", {:controller =>"comments", :action => "destroy", :id => comment.id}, :class => 'btn', method: :delete  %>
+      <% end %>
     </small>
     <%= form_for [comment.post, Comment.new] do |f| %>
         <%= f.hidden_field :author, :value => current_user.email %>

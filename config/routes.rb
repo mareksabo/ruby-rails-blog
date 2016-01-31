@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   put '/comments/:id/:action' => 'comments#upvote'
   put '/comments/:id/:action' => 'comments#downvote'
+  delete '/comments/:id' => 'comments#destroy'
   get 'posts/filter/:name' => 'posts#filter', as: :filter
 
   # The priority is based upon order of creation: first created -> highest priority.
