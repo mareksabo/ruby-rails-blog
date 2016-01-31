@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, :only => [:create]
   end
+  put '/comments/:id/:action' => 'comments#upvote'
+  put '/comments/:id/:action' => 'comments#downvote'
   get 'posts/filter/:name' => 'posts#filter', as: :filter
 
   # The priority is based upon order of creation: first created -> highest priority.

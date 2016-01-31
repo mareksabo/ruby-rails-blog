@@ -7,6 +7,8 @@ gem 'mailgunner', '~> 1.3.0'
 gem 'cancancan'
 gem 'rolify'
 gem 'paperclip'
+gem 'acts_as_votable', '~> 0.10.0'
+gem 'closure_tree'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
