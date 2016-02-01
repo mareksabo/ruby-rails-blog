@@ -15,7 +15,9 @@ class Ability
          can :downvote, :all
          can :update, Post,  :author => user.email
          can :destroy, Post,  :author => user.email
-         can :destroy, Comment,  :author => user.email
+         can :destroy, Comment do |c|
+           Post.find(c.post_id).author == user.email
+         end
          can :create, Comment, :comment_type => 'visible'
          can :create, Comment, :comment_type => 'moderated'
        end

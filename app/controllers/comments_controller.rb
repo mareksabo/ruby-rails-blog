@@ -2,7 +2,10 @@ class CommentsController < ApplicationController
 
   before_filter :load_commentable
   before_filter :find_comment, :only => [:upvote, :downvote]
-  
+  before_action :authenticate_user!, :except => [:create]
+  load_and_authorize_resource :except => [:create]
+  skip_load_resource :only => [:create]
+
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create!(params[:comment].permit!)
