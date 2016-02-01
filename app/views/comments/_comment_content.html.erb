@@ -1,0 +1,13 @@
+<%= comment.body %>
+<br>
+<small><i>Posted <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.author %></i></small>
+<br>
+<small>
+  <%= link_to 'Upvote', {:controller =>'comments', :action => 'upvote', :id => comment.id}, :class => 'btn', method: :put %>
+  <%= comment.get_upvotes.size %>
+  <%= link_to 'Downvote', {:controller =>'comments', :action => 'downvote', :id => comment.id}, :class => 'btn', method: :put %>
+  <%= comment.get_downvotes.size %>
+  <% if can? :destroy, comment %>
+      <%=  link_to 'Delete', {:controller =>'comments', :action => 'destroy', :id => comment.id}, :class => 'btn', method: :delete  %>
+  <% end %>
+</small>

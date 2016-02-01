@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   end
   put '/comments/:id/:action' => 'comments#upvote'
   put '/comments/:id/:action' => 'comments#downvote'
+  put '/comments/:id/:action' => 'comments#approve'
+  put '/comments/:id/:action' => 'comments#reject'
   delete '/comments/:id' => 'comments#destroy'
   get 'posts/filter/:name' => 'posts#filter', as: :filter
 

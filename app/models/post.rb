@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
 
   has_and_belongs_to_many :tags
-  has_many :comments
+  has_many :comments, -> { order 'created_at ASC' }
   validates_presence_of :author,
                         :title,
                         :body

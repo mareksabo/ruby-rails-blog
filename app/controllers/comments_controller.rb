@@ -9,7 +9,11 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create!(params[:comment].permit!)
-    redirect_to root_path
+    if @post.author == @comment.author
+      approve
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -25,6 +29,17 @@ class CommentsController < ApplicationController
 
   def downvote
     @comment.downvote_from current_user
+    redirect_to root_path
+  end
+
+  def approve
+    @comment.is_approved = true
+    @comment.save
+    redirect_to root_path
+  end
+
+  def reject
+    @comment.destroy
     redirect_to root_path
   end
 
