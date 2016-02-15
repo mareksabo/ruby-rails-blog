@@ -1,10 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<h2>Filter by tag</h2>
-
-<% @tags.each do |tag| %>
-    <%= link_to tag.name, filter_path(tag.name), :class => 'filter-by-tag' %>
-<% end %>
+<h4 class="text-center">Filter by tag</h4>
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <% @tags.each do |tag| %>
+        <%= link_to tag.name, filter_path(tag.name), :class => 'filter-by-tag' %>
+    <% end %>
+  </div>
+</div>
 
 <h2> <%= link_to 'Posts', posts_path %> </h2>
 
@@ -22,8 +23,9 @@
 
         <% if can? :update, post %>
             <div>
-              <%= link_to 'Edit', edit_post_path(post) %>
-              <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Do you really want to delete this post?' } %>
+              <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-lg btn-primary' %>
+              <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Do you really want to delete this post?' },
+                          class: 'btn btn-lg btn-primary'%>
             </div>
             <br>
         <% end %>
@@ -41,7 +43,7 @@
               </div>
               <%= f.text_area :body %>
               </p>
-              <p><%= f.submit 'Add new comment' %></p>
+              <p><%= f.submit 'Add new comment', class: 'btn btn-sm btn-primary' %></p>
           <% end %>
       <% end %>
     </div>
