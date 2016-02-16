@@ -1,23 +1,30 @@
-<h1>New Post</h1>
+<div class="col-md-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">New post</div>
+    <div class="panel-body">
 
-<%= simple_form_for(@post) do |f| %>
-    <div class="field">
-      <%= f.input :author, input_html: {value: current_user.email }, :readonly => true %>
-    </div>
-    <div class="field">
-      <%= f.input :title %>
-    </div>
-    <div class="field">
-      <%= f.input :body %>
-    </div>
+      <%= simple_form_for(@post) do |f| %>
+          <div class="field">
+            <%= f.input :author, input_html: {value: current_user.email }, :readonly => true %>
+          </div>
+          <div class="field">
+            <%= f.input :title %>
+          </div>
+          <div class="field">
+            <%= f.input :body %>
+          </div>
 
-    <%= f.input :tags_string %>
+          <%= f.input :tags_string %>
 
-    <%= f.input :comment_type, :selected => 0 %>
+          <%= f.input :comment_type, :selected => 0 %>
 
-    <div class="actions">
-      <%= f.submit %>
+          <div class="actions">
+            <%= f.button :submit %>
+          </div>
+      <% end %>
+
     </div>
-<% end %>
+  </div>
+</div>
 
 <%= link_to 'Back', posts_path %>

@@ -13,11 +13,19 @@
         <% end %>
     <% else %>
         <%= render partial: 'comments/comment_content', :locals => {:comment => comment} %>
-        <%= form_for [comment.post, Comment.new] do |f| %>
+        <%= form_for [comment.post, Comment.new], :html => {:class => 'form-horizontal center'} do |f| %>
             <%= f.hidden_field :author, :value => current_user.email %>
             <%= f.hidden_field :parent_id, :value => comment.id %>
-            <%= f.text_field :body %>
-            <%= f.submit 'Reply' %>
+            <div class="form-group" >
+              <div class="col-md-6 ">
+                <%= f.text_area :body, class: 'form-control' %>
+              </div>
+              <div class="col-md-6">
+                <%= f.submit 'Reply', class: 'btn btn-default btn-primary ' %>
+              </div>
+            </div>
+
+            <br>
         <% end %>
     <% end %>
     <div class="reply">

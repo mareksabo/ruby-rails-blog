@@ -1,54 +1,69 @@
 <h4 class="text-center">Filter by tag</h4>
 <div class="row">
   <div class="col-xs-12 text-center">
+    <%= link_to 'All posts', posts_path, :class => 'btn btn-info'  %>
     <% @tags.each do |tag| %>
-        <%= link_to tag.name, filter_path(tag.name), :class => 'filter-by-tag' %>
+        <%= link_to tag.name, filter_path(tag.name), :class => 'btn btn-info'  %>
     <% end %>
   </div>
 </div>
-
-<h2> <%= link_to 'Posts', posts_path %> </h2>
-
+<% i = 0 %>
 <% @posts.each do |post| %>
-    <div class="container">
+    <% if i % 2 == 0 %>
+        <div class="post-even">
+    <% else %>
+        <div class="post-odd">
+    <% end %>
+    <% i = i+1  %>
       <div class="post">
         <h3><%= post.title %></h3>
         <i><p><%= post.author %></p></i>
         <small><p>Type <%= post.comment_type %></p></small>
-        <div class="post-body"><%= post.body %></div>
-        <h3>Tags</h3>
-        <div class="post-tags"><%= post.tags.join(', ') %></div>
-      </div>
-      <div class="comments">
-
         <% if can? :update, post %>
             <div>
-              <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-lg btn-primary' %>
+              <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-sm btn-primary' %>
               <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Do you really want to delete this post?' },
-                          class: 'btn btn-lg btn-primary'%>
+                          class: 'btn btn-sm btn-primary'%>
             </div>
             <br>
         <% end %>
-        <div id="comments">
-          <% post.comments.each do |comment| %>
-              <%= render comment if comment.parent_id.nil? %>
-          <% end %>
-        </div>
+        <div class="post-tags"><%= post.tags.join(', ') %></div>
+        <div class="post-body"><%= post.body %></div>
       </div>
+    <hr>
+    <div id="blog-comments" class="comments">
+      <% post.comments.each do |comment| %>
+          <%= render comment if comment.parent_id.nil? %>
+      <% end %>
+    </div>
+
       <% if post.comment_type != 'forbidden' %>
-          <%= form_for [post, Comment.new] do |f| %>
-              <p>
+          <%= form_for [post, Comment.new], :html => {:class => 'form-horizontal center'} do |f| %>
               <div>
                 <%= f.hidden_field :author, :value => current_user.email %>
               </div>
-              <%= f.text_area :body %>
-              </p>
-              <p><%= f.submit 'Add new comment', class: 'btn btn-sm btn-primary' %></p>
+              <div class="form-group">
+                <div class="col-md-6">
+                  <%= f.text_area :body, class: 'form-control' %>
+                </div>
+                <div class="col-md-6">
+                  <%= f.submit 'Add new comment', class: 'btn btn-primary ' %>
+                </div>
+              </div>
+
           <% end %>
       <% end %>
     </div>
+
 <% end %>
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <%= link_to 'Create post', new_post_path, :class => 'btn btn-primary'  %>
+
+  </div>
+</div>
+
+<br>
