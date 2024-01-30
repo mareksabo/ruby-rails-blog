@@ -18,13 +18,11 @@ jobs:
       id: determine_directory
       run: |
         if [ "${{ github.event_name }}" = 'push' ] && [[ "${{ github.event_ref }}" =~ ^refs/tags/ ]]; then
-          echo "::set-output name=directory::launch-release-local/automation-hosts/agentctl/"
+          echo "directory=launch-release-local/automation-hosts/agentctl/" >> $JFROG_UPLOAD_DIR
         else
-          echo "::set-output name=directory::launch-release-local/automation-hosts/agentctl-testing/"
+          echo "directory=launch-release-local/automation-hosts/agentctl-testing/" >> $JFROG_UPLOAD_DIR
         fi
 
     - name: Echo
       run: |
-        echo "${{ steps.determine_directory.outputs.directory }}"
-    
-    
+        echo "$JFROG_UPLOAD_DIR"
