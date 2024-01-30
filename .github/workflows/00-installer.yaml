@@ -2,6 +2,9 @@ name: 00-installer-Plugin
 
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - '*'
 
 jobs:
 
