@@ -1,0 +1,30 @@
+name: 00-installer-Plugin
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+################# Pipeline permissions ################
+  build:
+    permissions:
+      checks: write
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Determine Target Directory
+      id: determine_directory
+      run: |
+        if [[ ${{ github.event_name }} == 'push' && ${{ github.event_ref }} =~ ^refs/tags/ ]]; then
+          echo "::set-output name=directory::launch-release-local/automation-hosts/agentctl/"
+        else
+          echo "::set-output name=directory::launch-release-local/automation-hosts/agentctl-testing/"
+        fi
+
+    - name: Echo
+      run: |
+        echo "${{ steps.determine_directory.outputs.directory }}"
+    
+    
