@@ -20,7 +20,7 @@ jobs:
     - name: Determine Target Directory
       id: determine_directory
       run: |
-        if [ "${{ github.event_name }}" = 'push' ] && [[ "${{ github.event_ref }}" =~ ^refs/tags/ ]]; then
+        if [ "${{ github.event_name }}" = 'push' ] && [[ "${{ github.ref_name }}" =~ ^refs/tags/ ]]; then
           echo "directory=launch-release-local/automation-hosts/agentctl/" >> $GITHUB_ENV
         else
           echo "directory=launch-release-local/automation-hosts/agentctl-testing/" >> $GITHUB_ENV
